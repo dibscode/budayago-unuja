@@ -17,10 +17,13 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    protected $fillable = [
-        'name',
+   protected $fillable = [
+        'nama_lengkap', 
         'email',
         'password',
+        'role', 
+        'alamat',
+        'no_telp',
     ];
 
     /**
@@ -32,6 +35,15 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    
+    public function produks()
+    {
+        return $this->hasMany(Produk::class, 'id_penjual');
+    }
+    public function keranjang()
+    {
+        return $this->hasMany(Keranjang::class, 'id_user');
+    }
 
     /**
      * Get the attributes that should be cast.
