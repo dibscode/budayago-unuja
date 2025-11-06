@@ -15,7 +15,7 @@ class Budaya extends Model
 
     public function segments()
     {
-        return $this->hasMany(Segment::class, 'id_budaya');
+        return $this->hasMany(Segment::class, 'id_budaya')->orderBy('urutan', 'asc');
     }
 
     public function arsips()
