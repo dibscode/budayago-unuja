@@ -7,26 +7,19 @@ use Illuminate\Http\Request;
 
 class BudayaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         $cultures = Budaya::all();
         return view('pages.dashboard.cultures.index', compact('cultures'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -42,12 +35,10 @@ class BudayaController extends Controller
 .');
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(string $id)
     {
-        $budaya = Budaya::with('segments')->findOrFail($id);
+        $budaya = Budaya::with('segments', 'lagus','arsips')->findOrFail($id);
         return view('pages.dashboard.cultures.segments', compact('budaya'));
     }
 
@@ -85,17 +76,13 @@ class BudayaController extends Controller
         return redirect()->route('cultures.show', $id)->with('success', 'Segment deleted successfully.');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+  
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, string $id)
     {
         $validated = $request->validate([
@@ -111,9 +98,7 @@ class BudayaController extends Controller
         return redirect()->route('cultures.index')->with('success', 'Budaya updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
         $budaya = Budaya::findOrFail($id);

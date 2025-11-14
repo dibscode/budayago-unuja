@@ -43,8 +43,8 @@
             <ul class="menu">
                 <li class="sidebar-title">Menu</li>
 
-                <li class="sidebar-item">
-                    <a href="index.html" class="sidebar-link">
+                <li class="sidebar-item {{ request()->is('dashboard') ? 'active' : '' }}">
+                    <a href="{{ route('dashboard') }}" class="sidebar-link">
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
@@ -59,11 +59,35 @@
 
                 <li class="sidebar-item {{ request()->is('cultures*') ? 'active' : '' }}">
                     <a href="{{ route('cultures.index') }}" class="sidebar-link">
-                        <i class="fa-solid fa-users"></i>
-                        <span>Budaya</span>
+                        <i class="fa-solid fa-landmark"></i> <span>Budaya</span>
                     </a>
                 </li>
-            </ul>
+                <li class="sidebar-item {{ request()->is('lagu*') ? 'active' : '' }}">
+                    <a href="{{ route('lagu.index') }}" class="sidebar-link">
+                        <i class="fa-solid fa-music"></i>
+                        <span>Lagu</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ request()->is('arsip*') ? 'active' : '' }}">
+                    <a href="{{ route('arsip.index') }}" class="sidebar-link">
+                        <i class="fa-solid fa-box-archive"></i>
+                        <span>Arsip</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-title">Akun</li>
+                
+                <li class="sidebar-item">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <a href="{{ route('logout') }}" class="sidebar-link" 
+                           onclick="event.preventDefault(); this.closest('form').submit();">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Log Out</span>
+                        </a>
+                    </form>
+                </li>
+                </ul>
         </div>
     </div>
 </div>
